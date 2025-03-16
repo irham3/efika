@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, Phone, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { useScrollDirection } from '@/hooks/useScrollDirection';
 import Link from 'next/link';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useRouter();
+  const pathname = usePathname();
   const { scrollDirection, isAtTop } = useScrollDirection();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Navbar = () => {
   }, []);
 
   const scrollToSection = (id: string) => {
-    if (location.pathname !== '/') {
+    if (pathname !== '/') {
       return;
     }
     const element = document.getElementById(id);
@@ -74,13 +74,13 @@ const Navbar = () => {
         initial="visible"
         animate={scrollDirection === 'down' && !isAtTop ? "hidden" : "visible"}
         variants={navVariants}
-        className={`${scrolled? 'bg-background/60 fixed': 'bg-white'} backdrop-blur-md z-50 py-4 mt-4 rounded-[1.7rem] mx-4 w-[calc(100%-2rem)]`}
+        className={`${scrolled ? 'bg-background/60 sticky top-[1rem]' : 'bg-white'} backdrop-blur-md z-50 py-4 rounded-[1.7rem] w-[100%]`}
       >
         <div className="w-full px-8 flex items-center">
           <Link href="/" className="text-3xl font-bold">
-            <Image src='logo-efika.svg' alt='Logo Efika'/>
+            <Image src='logo-efika.svg' alt='Logo Efika' width={100} height={100} />
           </Link>
-          
+
           <div className="hidden md:flex items-center justify-center flex-1 space-x-8">
             <button onClick={() => scrollToSection('work')} className="nav-link">Work</button>
             <button onClick={() => scrollToSection('services')} className="nav-link">Services</button>
@@ -89,16 +89,16 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:block">
-            <Link 
-              href="/contact" 
-              className="px-4 py-3 bg-black text-white rounded-lg hover:bg-slate-900 transition-colors"
+            <Link
+              href="/contact"
+              className="flex px-4 gap-2 items-center py-2 bg-black text-white rounded-lg hover:bg-slate-900 transition-colors"
             >
-              Book a Call
+              Book a Call <Phone size={20} fill='white' strokeWidth={0}/>
             </Link>
           </div>
 
           <div className="md:hidden ml-auto">
-            <button 
+            <button
               className="text-foreground"
               onClick={() => setIsOpen(!isOpen)}
             >
@@ -106,38 +106,38 @@ const Navbar = () => {
             </button>
           </div>
 
-          <motion.div 
+          <motion.div
             className="fixed md:hidden top-0 right-0 h-screen w-full bg-background/95 backdrop-blur-md"
             initial="closed"
             animate={isOpen ? "open" : "closed"}
             variants={menuVariants}
           >
             <div className="flex flex-col items-center justify-center h-full space-y-8">
-              <button 
+              <button
                 onClick={() => scrollToSection('work')}
                 className="text-4xl font-bold hover:text-primary transition-colors"
               >
                 Work
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('services')}
                 className="text-4xl font-bold hover:text-primary transition-colors"
               >
                 Services
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('pricing')}
                 className="text-4xl font-bold hover:text-primary transition-colors"
               >
                 Pricing
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('about')}
                 className="text-4xl font-bold hover:text-primary transition-colors"
               >
                 About
               </button>
-              <Link 
+              <Link
                 href="/contact"
                 className="text-4xl font-bold hover:text-primary transition-colors"
                 onClick={() => setIsOpen(false)}

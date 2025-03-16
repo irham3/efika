@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import LogoScroll from '../components/LogoScroll';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Navbar from '@/components/Navbar';
 
 const PricingCard = ({ title, price, features, isPopular = false }: {
   title: string, price: number, features: string[], isPopular?: boolean
@@ -13,18 +14,17 @@ const PricingCard = ({ title, price, features, isPopular = false }: {
   <motion.div
     initial={{ y: 50, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
-    className={`p-8 rounded-2xl border ${
-      isPopular ? 'border-primary shadow-lg' : 'border-border'
-    }`}
+    className={`p-4 sm:p-6 md:p-8 rounded-2xl border ${isPopular ? 'border-primary shadow-lg' : 'border-border'
+      }`}
   >
     {isPopular && (
       <span className="inline-block px-4 py-1 bg-primary/10 text-primary text-sm rounded-full mb-4">
         Most Popular
       </span>
     )}
-    <h3 className="text-2xl font-bold mb-2">{title}</h3>
+    <h3 className="text-xl md:text-2xl font-bold mb-2">{title}</h3>
     <div className="mb-6">
-      <span className="text-4xl font-bold">${price}</span>
+      <span className="text-3xl md:text-4xl font-bold">${price}</span>
       <span className="text-muted-foreground">/month</span>
     </div>
     <ul className="space-y-4">
@@ -35,11 +35,10 @@ const PricingCard = ({ title, price, features, isPopular = false }: {
         </li>
       ))}
     </ul>
-    <button className={`w-full mt-8 py-3 rounded-lg transition-colors ${
-      isPopular 
-        ? 'bg-primary text-white hover:bg-primary/90' 
-        : 'bg-secondary hover:bg-secondary/80'
-    }`}>
+    <button className={`w-full mt-8 py-3 rounded-lg transition-colors ${isPopular
+      ? 'bg-primary text-white hover:bg-primary/90'
+      : 'bg-secondary hover:bg-secondary/80'
+      }`}>
       Get Started
     </button>
   </motion.div>
@@ -47,30 +46,30 @@ const PricingCard = ({ title, price, features, isPopular = false }: {
 
 const Home = () => {
   const [currentWord, setCurrentWord] = useState('Journey');
-  
+
   useEffect(() => {
     const words = ['Journey', 'Experience', 'Story'];
     let currentIndex = 0;
-    
+
     const interval = setInterval(() => {
       currentIndex = (currentIndex + 1) % words.length;
       setCurrentWord(words[currentIndex]);
-    },4000);
-    
+    }, 4000);
+
     return () => clearInterval(interval);
   }, []);
-  
+
   const [currentCharacter, setCurrentCharacter] = useState('character-1.svg');
-  
+
   useEffect(() => {
     let currentIndex = 0;
-    
+
     const interval = setInterval(() => {
       currentIndex = (currentIndex + 1) % 8;
       if (currentIndex === 0) currentIndex = 1;
       setCurrentCharacter(`character-${currentIndex}.svg`);
     }, 1000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -133,9 +132,9 @@ const Home = () => {
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
-      transition: { 
+      transition: {
         duration: 0.5,
         when: "beforeChildren",
         staggerChildren: 0.3
@@ -159,16 +158,17 @@ const Home = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="mt-4 space-y-4 px-4"
-      >
+        className="mt-4 space-y-4 px-2 sm:px-4"
+        >
+        <Navbar />
         {/* Hero Section */}
-        <section 
-          id="hero" 
-          className="flex space-x-4 overflow-hidden"
-          style={{ height: 'calc(100vh - 20rem)'}}>
-          <div className="relative flex flex-col flex-1 justify-between p-12 bg-[#FF5722] rounded-[2rem] w-full">
-            <motion.h1 
-              className="text-7xl md:text-8xl lg:text-[7.7rem] font-bold text-white mb-8 leading-tight"
+        <section
+          id="hero"
+          className="flex flex-col lg:flex-row gap-4 overflow-hidden"
+          style={{ minHeight: '60vh', height: 'auto' }}>
+          <div className="relative flex flex-col flex-1 justify-between p-4 sm:p-8 md:p-12 bg-[#FF5722] rounded-[1rem] sm:rounded-[2rem] w-full">
+            <motion.h1
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 md:mb-8 leading-tight"
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
@@ -185,45 +185,50 @@ const Home = () => {
                 {currentWord}
               </motion.span>
               <br />
-              <p className='mt-6'>is By Design.</p>
+              <p className='mt-2 md:mt-6'>is By Design.</p>
             </motion.h1>
-            <img src='hero-decor.svg' className='absolute top-0 right-0'/>
-            
+            <img src='hero-decor.svg' className='absolute top-0 right-0 md:w-auto' />
+
             <motion.div
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex bg-white rounded-2xl w-full items-center justify-between px-4 py-4 pr-4"
+              className="flex flex-col sm:flex-row bg-white rounded-md w-full items-center justify-between p-4"
             >
-              <span className="text-[2rem] mr-4">Start your journey with our <b>free discuss facility.</b> </span>
-              <button className="bg-black text-[1.2rem] text-white px-6 py-4 rounded-2xl hover:bg-black/90 transition-colors">
+              <span className="text-base sm:text-xl md:text-2xl mr-0 sm:mr-4 text-center sm:text-left">Start your journey with our <b>free discuss facility.</b> </span>
+              <button className="bg-black text-base md:text-[1.2rem] text-white px-4 py-2 rounded-md hover:bg-black/90 transition-colors whitespace-nowrap">
                 Let&apos;s Talk ⚡
               </button>
             </motion.div>
           </div>
 
-          <motion.div 
-            className="flex justify-center items-center"
+          <motion.div
+            className="bg-white flex justify-center items-center lg:w-1/3 relative rounded-[1rem] sm:rounded-[2rem] overflow-hidden"
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <img 
-              src={currentCharacter} 
-              alt="Character" 
-              className="h-full object-contain"
-            />
+            <img src='/shape/shape-2.svg' className='absolute top-0 w-auto' />
+            <img src='/shape/shape-1.svg' className='absolute bottom-0 w-auto' />
+            <div className="h-[300px] md:h-[400px] lg:h-[500px] w-full flex items-end justify-center">
+              <img
+                src={currentCharacter}
+                alt="Character"
+                className="h-auto max-h-full w-auto object-contain"
+                style={{ transform: 'translateY(0)' }}
+              />
+            </div>
           </motion.div>
         </section>
 
         {/* Client Logos Section */}
-        <div className="w-full mx-auto bg-white rounded-[2rem] overflow-hidden">
+        <div className="w-full mx-auto bg-white rounded-[1rem] sm:rounded-[2rem] overflow-hidden">
           <LogoScroll />
         </div>
 
         {/* Stats Section */}
-        <section className="w-full mx-auto bg-white rounded-[3rem] p-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <section className="w-full mx-auto bg-white rounded-[1.5rem] sm:rounded-[3rem] p-6 sm:p-8 md:p-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             <Counter end={150} label="Happy Clients" />
             <Counter end={200} label="Projects Completed" />
             <Counter end={10} label="Years Experience" />
@@ -232,9 +237,9 @@ const Home = () => {
         </section>
 
         {/* Services Section */}
-        <div id="services" className="w-full mx-auto bg-white rounded-[3rem] p-12">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-16 text-center"
+        <div id="services" className="w-full mx-auto bg-white rounded-[1.5rem] sm:rounded-[3rem] p-6 sm:p-8 md:p-12">
+          <motion.h2
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-16 text-center"
             initial={{ y: 50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
@@ -242,139 +247,130 @@ const Home = () => {
             Our <span className="text-primary">Services</span>
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             <motion.div
-              className="folder-card bg-orange-100"
+              className="folder-card p-4 sm:rounded-[1rem] rounded-[2rem] bg-orange-100"
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              <FolderArchive className="h-10 w-10 text-primary mb-4" />
-              <h3 className="text-xl font-bold mb-2">Web Development</h3>
+              <FolderArchive className="h-8 w-8 md:h-10 md:w-10 text-primary mb-4" />
+              <h3 className="text-lg md:text-xl font-bold mb-2">Web Development</h3>
               <p className="text-muted-foreground">Custom web applications built with modern technologies.</p>
             </motion.div>
 
             <motion.div
-              className="folder-card bg-orange-50"
+              className="folder-card p-4 sm:rounded-[1rem] rounded-[2rem] bg-orange-50"
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
             >
-              <FolderGit2 className="h-10 w-10 text-primary mb-4" />
-              <h3 className="text-xl font-bold mb-2">UI/UX Design</h3>
+              <FolderGit2 className="h-8 w-8 md:h-10 md:w-10 text-primary mb-4" />
+              <h3 className="text-lg md:text-xl font-bold mb-2">UI/UX Design</h3>
               <p className="text-muted-foreground">Beautiful, intuitive interfaces that users love.</p>
             </motion.div>
 
             <motion.div
-              className="folder-card bg-orange-200"
+              className="folder-card p-4 sm:rounded-[1rem] rounded-[2rem] bg-orange-200 sm:col-span-2 md:col-span-1"
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
             >
-              <FolderSync className="h-10 w-10 text-primary mb-4" />
-              <h3 className="text-xl font-bold mb-2">Digital Strategy</h3>
+              <FolderSync className="h-8 w-8 md:h-10 md:w-10 text-primary mb-4" />
+              <h3 className="text-lg md:text-xl font-bold mb-2">Digital Strategy</h3>
               <p className="text-muted-foreground">Strategic planning for digital success.</p>
             </motion.div>
           </div>
         </div>
-        
+
         {/* Service Description Section */}
-        <section className="bg-black text-white w-full overflow-hidden rounded-[2.5rem]">
-          <motion.div 
-            className="p-6 flex flex-col lg:flex-row items-center justify-between space-x-6"
+        <section className="bg-black text-white w-full overflow-hidden rounded-[1.5rem] sm:rounded-[2.5rem]">
+          <motion.div
+            className="p-4 sm:p-6 flex flex-col lg:flex-row items-center justify-between lg:space-x-6 space-y-6 lg:space-y-0"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             {/* Left side with characters and speech bubble */}
-            <motion.div className="relative w-full lg:w-1/3 mb-10 lg:mb-0">
-              <motion.div 
+            <motion.div className="w-full lg:w-1/3 mb-8 lg:mb-0">
+              <motion.div
                 className="relative z-20"
                 variants={characterVariants}
               >
                 {/* Speech bubble */}
-                <motion.div 
-                  className="bg-[#FB602E] text-white py-6 rounded-xl mb-8 relative w-fit"
+                <motion.div
+                  className="bg-[#FB602E] text-white py-3 sm:py-4 px-3 sm:px-6 rounded-lg sm:rounded-xl relative w-fit max-w-[90%] sm:max-w-none"
                   variants={itemVariants}
                 >
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
+                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-medium leading-tight">
                     Bring your journey further with us!
                   </h2>
-                  <div className="absolute -bottom-4 left-16 w-8 h-8 bg-[#FB602E] rotate-45"></div>
+                  <div className="absolute -bottom-3 sm:-bottom-4 left-8 sm:left-16 w-6 sm:w-8 h-6 sm:h-8 bg-[#FB602E] rotate-45"></div>
                 </motion.div>
-                
+
                 {/* Characters container */}
-                <div className="flex items-end justify-center relative h-80">
-                  {/* Character 1 - Thumbs up kid */}
-                  {/* <motion.div 
-                    className="absolute left-10 bottom-0 w-48 h-48 z-10"
-                    variants={characterVariants}
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ delay: 0.3 }}
-                  >
-                  </motion.div> */}
-                    <img 
-                      src="/character-7.svg" 
-                      alt="Character giving thumbs up" 
-                      className="w-full h-full object-contain"
-                      style={{ mixBlendMode: 'color-burn' }}
-                    />
-                  
+                <div className="flex items-end justify-between translate-y-6 sm:translate-y-8 lg:translate-y-10">
+                  <img
+                    src="/branding-char-1.svg"
+                    alt="Character giving thumbs up"
+                    style={{ mixBlendMode: 'color-burn' }}
+                    className='w-[45%] sm:w-1/2 h-auto object-contain'
+                  />
+
                   {/* Character 2 - OK gesture with glasses */}
-                  <motion.div 
-                    className="absolute left-40 bottom-0 w-48 h-48 z-20"
+                  <motion.div
+                    className="absolute bottom-0 -right-[2rem] sm:-right-[3rem] lg:-right-[4rem] z-20 w-[60%] sm:w-[63%] lg:w-[66%]"
                     variants={characterVariants}
                     initial="hidden"
                     animate="visible"
                     transition={{ delay: 0.6 }}
                   >
-                    <img 
-                      src="/character-2.svg" 
-                      alt="Character making OK gesture" 
-                      className="w-full h-full object-contain"
+                    <img
+                      src="/branding-char-2.svg"
+                      alt="Character making OK gesture"
                       style={{ mixBlendMode: 'multiply' }}
+                      className='w-full h-auto object-contain'
                     />
                   </motion.div>
                 </div>
               </motion.div>
             </motion.div>
-            
+
             {/* Right side with branding content */}
-            <motion.div 
-              className="flex flex-col space-y-4 bg-white text-black rounded-xl p-8 w-full lg:w-2/3"
+            <motion.div
+              className="flex flex-col space-y-4 bg-white text-black rounded-xl p-4 sm:p-6 md:p-8 w-full lg:w-2/3"
               variants={itemVariants}
             >
               <div className="flex items-center">
-                <div className="w-6 h-6 rounded-full bg-orange-500 mr-3"></div>
-                <h3 className="text-xl font-bold uppercase tracking-wide">Branding</h3>
+                <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-orange-500 mr-3"></div>
+                <h3 className="text-lg sm:text-xl font-bold uppercase tracking-wide">Branding</h3>
                 <div className="ml-auto flex">
-                  <button className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-2">
+                  <button className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-200 flex items-center justify-center mr-2">
                     <span className="transform rotate-180">&rsaquo;</span>
                   </button>
-                  <button className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center">
+                  <button className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-orange-500 text-white flex items-center justify-center">
                     &rsaquo;
                   </button>
                 </div>
               </div>
               <hr />
-              
-              <motion.div 
+
+              <motion.div
                 variants={itemVariants}
-                className='flex space-x-24'>
-                <h2 className="text-2xl md:text-3xl font-medium mb-6 max-w-96">
+                className='flex flex-col md:flex-row md:space-x-8 lg:space-x-24 space-y-6 md:space-y-0'>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-medium mb-4 md:mb-6 max-w-full md:max-w-96">
                   Create a memorable brand identity with a visual and strategic approach that aligns with your audience and business goals.
                 </h2>
-                
-                <ul className="space-y-4">
+
+                <ul className="space-y-3 sm:space-y-4">
                   {["Logo", "Brand Guideline", "Stationary Design", "Marketing Materials", "Packaging Design", "Pitch Deck"]
                     .map((item, index) => (
-                      <motion.li 
+                      <motion.li
                         key={index}
-                        className="flex items-center text-lg"
+                        className="flex items-center text-base sm:text-lg"
                         variants={itemVariants}
                         custom={index}
                       >
@@ -391,9 +387,9 @@ const Home = () => {
 
         {/* Work Section */}
         <div id="work" className="w-full">
-          <div className="mx-auto bg-white rounded-[3rem] p-12">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold mb-16 text-center"
+          <div className="mx-auto bg-white rounded-[1.5rem] sm:rounded-[3rem] p-6 sm:p-8 md:p-12">
+            <motion.h2
+              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-16 text-center"
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -401,7 +397,7 @@ const Home = () => {
               Selected <span className="text-primary">Work</span>
             </motion.h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
               {projects.map((project, index) => (
                 <motion.div
                   key={index}
@@ -412,17 +408,17 @@ const Home = () => {
                   className="group bg-card rounded-2xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
                 >
                   <div className="aspect-w-16 aspect-h-12">
-                    <img 
-                      src={project.image} 
+                    <img
+                      src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm rounded-full mb-3">
                       {project.category}
                     </span>
-                    <h3 className="text-xl font-bold">{project.title}</h3>
+                    <h3 className="text-lg sm:text-xl font-bold">{project.title}</h3>
                   </div>
                 </motion.div>
               ))}
@@ -432,9 +428,9 @@ const Home = () => {
 
         {/* Pricing Section */}
         <div id="pricing" className="w-full">
-          <div className="mx-auto bg-white rounded-[3rem] p-12">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold mb-16 text-center"
+          <div className="mx-auto bg-white rounded-[1.5rem] sm:rounded-[3rem] p-6 sm:p-8 md:p-12">
+            <motion.h2
+              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-16 text-center"
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -443,7 +439,7 @@ const Home = () => {
             </motion.h2>
 
             <motion.p
-              className="text-xl text-muted-foreground mb-16 max-w-2xl mx-auto text-center"
+              className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 md:mb-16 max-w-2xl mx-auto text-center"
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -452,7 +448,7 @@ const Home = () => {
               Choose the perfect plan for your needs. All plans include our core features.
             </motion.p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {plans.map((plan, index) => (
                 <PricingCard
                   key={index}
@@ -465,9 +461,9 @@ const Home = () => {
 
         {/* About Section */}
         <div id="about" className="w-full">
-          <div className="mx-auto bg-white rounded-[3rem] p-12">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold mb-16 text-center"
+          <div className="mx-auto bg-white rounded-[1.5rem] sm:rounded-[3rem] p-6 sm:p-8 md:p-12">
+            <motion.h2
+              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-16 text-center"
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -475,17 +471,17 @@ const Home = () => {
               About <span className="text-primary">Us</span>
             </motion.h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
               <motion.div
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                <h3 className="text-3xl font-bold mb-6">Our Story</h3>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 md:mb-6">Our Story</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  We are a creative digital studio passionate about crafting exceptional digital experiences. 
-                  Our team combines innovative design with cutting-edge technology to deliver solutions that 
+                  We are a creative digital studio passionate about crafting exceptional digital experiences.
+                  Our team combines innovative design with cutting-edge technology to deliver solutions that
                   make a lasting impact.
                 </p>
               </motion.div>
@@ -496,10 +492,10 @@ const Home = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
               >
-                <h3 className="text-3xl font-bold mb-6">Our Approach</h3>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 md:mb-6">Our Approach</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  We believe in the power of collaboration and innovation. Every project begins with a deep 
-                  understanding of our clients&apos; needs and goals. We then apply our expertise in design and 
+                  We believe in the power of collaboration and innovation. Every project begins with a deep
+                  understanding of our clients&apos; needs and goals. We then apply our expertise in design and
                   technology to create solutions that exceed expectations.
                 </p>
               </motion.div>
@@ -509,17 +505,17 @@ const Home = () => {
 
         {/* CTA Section */}
         <div id="contact" className="w-full">
-          <div className="mx-auto bg-white rounded-[3rem] p-12">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold mb-6 text-center"
+          <div className="mx-auto bg-white rounded-[1.5rem] sm:rounded-[3rem] p-6 sm:p-8 md:p-12">
+            <motion.h2
+              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-center"
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
             >
               Ready to Start Your Project?
             </motion.h2>
-            <motion.p 
-              className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-center"
+            <motion.p
+              className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto text-center"
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -536,7 +532,7 @@ const Home = () => {
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-primary text-white px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors"
+                className="inline-flex items-center gap-2 bg-primary text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg hover:bg-primary/90 transition-colors"
               >
                 Contact Us
                 <ArrowRight size={20} />
