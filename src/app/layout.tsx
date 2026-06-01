@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${rethinkSans.variable} font-sans antialiased text-brand-raisin selection:bg-brand-primary selection:text-white`}
+        className={`${rethinkSans.variable} font-sans antialiased text-brand-raisin selection:bg-brand-primary selection:text-white overflow-x-hidden`}
       >
         {children}
       </body>

@@ -11,7 +11,7 @@ import SectionReveal from '@/components/SectionReveal';
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col w-full font-sans overflow-x-hidden">
+    <main className="min-h-screen flex flex-col w-full font-sans">
       <Navbar />
       <SectionReveal delay={0.2}>
         <Hero />
