@@ -11,9 +11,9 @@ const projects = [
     desc2: "UX/UI, Frontend Development",
     year: "2024",
     images: [
-      "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000"
+      "/projects/ecommerce.png",
+      "/projects/dashboard.png",
+      "/projects/branding.png"
     ]
   },
   {
@@ -24,9 +24,9 @@ const projects = [
     desc2: "Product Design, App Development",
     year: "2024",
     images: [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&q=80&w=1000"
+      "/projects/fintech.png",
+      "/projects/dashboard.png",
+      "/projects/ecommerce.png"
     ]
   },
   {
@@ -37,9 +37,9 @@ const projects = [
     desc2: "Brand Strategy, Visual Identity",
     year: "2023",
     images: [
-      "https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1000"
+      "/projects/branding.png",
+      "/projects/editorial.png",
+      "/projects/packaging.png"
     ]
   },
   {
@@ -50,9 +50,9 @@ const projects = [
     desc2: "Layout Design, Typography",
     year: "2023",
     images: [
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000"
+      "/projects/editorial.png",
+      "/projects/branding.png",
+      "/projects/packaging.png"
     ]
   },
   {
@@ -63,9 +63,9 @@ const projects = [
     desc2: "Material Sourcing, Print Design",
     year: "2025",
     images: [
-      "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000"
+      "/projects/packaging.png",
+      "/projects/branding.png",
+      "/projects/editorial.png"
     ]
   },
   {
@@ -76,9 +76,9 @@ const projects = [
     desc2: "UX/UI, Data Visualization",
     year: "2025",
     images: [
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?auto=format&fit=crop&q=80&w=1000"
+      "/projects/dashboard.png",
+      "/projects/fintech.png",
+      "/projects/ecommerce.png"
     ]
   }
 ];
@@ -142,28 +142,57 @@ function PortfolioCard({ project }: { project: typeof projects[0] }) {
 
 export default function PortfolioGrid() {
   const [visibleCount, setVisibleCount] = useState(4);
+  const isExpanded = visibleCount >= projects.length;
 
-  const handleShowMore = () => {
-    setVisibleCount(prev => Math.min(prev + 2, projects.length));
+  const handleToggle = () => {
+    if (isExpanded) {
+      setVisibleCount(4);
+      // Scroll back up slightly so the user isn't left at the bottom of the page when items collapse
+      const element = document.getElementById('works');
+      if (element) {
+        const y = element.getBoundingClientRect().top + window.scrollY - 100; // offset for navbar
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    } else {
+      setVisibleCount(projects.length);
+    }
   };
 
   return (
     <section id="works" className="w-full px-6 md:px-12 py-16 md:py-20 bg-white">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16 md:gap-y-24">
-        {projects.slice(0, visibleCount).map((project) => (
-          <PortfolioCard key={project.id} project={project} />
-        ))}
-      </div>
+      <motion.div layout className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16 md:gap-y-24">
+        <AnimatePresence mode="popLayout">
+          {projects.slice(0, visibleCount).map((project) => (
+            <motion.div
+              key={project.id}
+              layout
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.95 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <PortfolioCard project={project} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
       
-      {visibleCount < projects.length && (
-        <div className="w-full flex justify-center mt-16 md:mt-32">
+      {projects.length > 4 && (
+        <motion.div layout className="w-full flex justify-center mt-16 md:mt-32">
           <button 
-            onClick={handleShowMore}
-            className="px-8 py-3 md:px-10 md:py-4 bg-brand-raisin text-white rounded-full font-bold hover:bg-black transition-colors"
+            onClick={handleToggle}
+            className="px-8 py-3 md:px-10 md:py-4 bg-brand-raisin text-white rounded-full font-bold hover:bg-brand-primary transition-colors flex items-center gap-2"
           >
-            Show All Projects
+            {isExpanded ? 'Show Less' : 'Show All Projects'}
+            <motion.span 
+              animate={{ rotate: isExpanded ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+              className="inline-block"
+            >
+              ↓
+            </motion.span>
           </button>
-        </div>
+        </motion.div>
       )}
     </section>
   );
