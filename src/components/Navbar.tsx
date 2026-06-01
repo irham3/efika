@@ -38,8 +38,8 @@ export default function Navbar() {
       }`}
     >
       <div className="flex items-center">
-        <Link href="/">
-          <img src="/logo-efika-full.png" alt="Efika Logo" className="h-8 md:h-10 w-auto" />
+        <Link href="/" className="flex items-center justify-center w-24 md:w-32 h-8 md:h-10">
+          <img src="/logo-efika-full.png" alt="Efika Logo" className="w-full h-full object-contain scale-[3] md:scale-[3.5] origin-center" />
         </Link>
       </div>
 
