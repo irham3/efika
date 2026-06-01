@@ -33,14 +33,14 @@ export default function SegmentedOfferings() {
   const handleNext = () => setActiveIndex((prev) => (prev < offerings.length - 1 ? prev + 1 : 0));
 
   return (
-    <section className="w-full px-12 py-32 bg-white flex flex-col md:flex-row items-center gap-16">
-      <div className="flex items-center gap-12 md:w-[45%] shrink-0">
-        <button onClick={handlePrev} className="text-3xl font-bold text-brand-raisin hover:text-brand-primary transition-colors">&lt;</button>
-        <h2 className="text-4xl md:text-5xl font-bold text-brand-raisin">{active.title}</h2>
-        <button onClick={handleNext} className="text-3xl font-bold text-brand-raisin hover:text-brand-primary transition-colors">&gt;</button>
+    <section className="w-full px-6 md:px-12 py-16 md:py-32 bg-white flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <div className="flex items-center justify-between w-full lg:w-[45%] shrink-0">
+        <button onClick={handlePrev} className="text-2xl md:text-3xl font-bold text-brand-raisin hover:text-brand-primary transition-colors p-2">&lt;</button>
+        <h2 className="text-3xl md:text-5xl font-bold text-brand-raisin text-center flex-1">{active.title}</h2>
+        <button onClick={handleNext} className="text-2xl md:text-3xl font-bold text-brand-raisin hover:text-brand-primary transition-colors p-2">&gt;</button>
       </div>
 
-      <div className="flex-1 flex flex-col md:flex-row items-stretch gap-12">
+      <div className="flex-1 flex flex-col sm:flex-row items-stretch gap-8 md:gap-12 w-full">
         <div className="flex-[3] flex flex-col items-start justify-center">
           <p className="text-2xl font-bold text-brand-raisin mb-10 leading-snug">
             {active.text}

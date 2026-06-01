@@ -2,15 +2,15 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section className="w-full px-12 pt-24 pb-32 flex flex-col md:flex-row gap-16 justify-between items-start">
+    <section className="w-full px-6 md:px-12 pt-12 md:pt-24 pb-20 md:pb-32 flex flex-col md:flex-row gap-10 md:gap-16 justify-between items-start">
       <div className="flex-1">
-        <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-semibold text-brand-raisin leading-[1.1] tracking-tight max-w-[900px]">
+        <h1 className="text-4xl md:text-5xl lg:text-[4.5rem] font-semibold text-brand-raisin leading-[1.1] tracking-tight max-w-[900px]">
           Design and Branding studio helping startup, agency, and brands to grow.
         </h1>
       </div>
 
-      <div className="md:w-[450px] flex flex-col gap-12 shrink-0 pt-4">
-        <p className="text-xl md:text-2xl font-medium text-brand-raisin leading-snug">
+      <div className="w-full md:w-[450px] flex flex-col gap-8 md:gap-12 shrink-0 md:pt-4">
+        <p className="text-lg md:text-2xl font-medium text-brand-raisin leading-snug">
           Every design decisions comes after understanding the Brand DNA, the products, audiences, and the impacts.
         </p>
 

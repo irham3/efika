@@ -1,15 +1,15 @@
 export default function ContactCTA() {
   return (
-    <section id="contact" className="w-full px-12 py-32 bg-white flex flex-col lg:flex-row gap-16">
-      <div className="w-[300px] shrink-0">
-        <h2 className="text-5xl md:text-6xl font-bold text-brand-raisin leading-[1.1] tracking-tight">
-          Let&apos;s work<br/>with us
+    <section id="contact" className="w-full px-6 md:px-12 py-16 md:py-32 bg-white flex flex-col xl:flex-row gap-10 xl:gap-16">
+      <div className="w-full xl:w-[300px] shrink-0">
+        <h2 className="text-4xl md:text-6xl font-bold text-brand-raisin leading-[1.1] tracking-tight">
+          Let&apos;s work<br className="hidden md:block"/>with us
         </h2>
       </div>
       
       <div className="flex-1 flex flex-col md:flex-row gap-8">
         {/* Card 1 */}
-        <div className="flex-1 bg-[#E2E2E2] rounded-none p-12 flex flex-col">
+        <div className="flex-1 bg-[#E2E2E2] rounded-none p-8 md:p-12 flex flex-col">
           <h3 className="text-2xl font-bold text-brand-raisin mb-4">Book a free call</h3>
           <p className="text-sm font-medium text-brand-raisin/60 mb-12 max-w-[350px] leading-relaxed">
             A session that you can have a free consultation with us to know what your brand truly needs before you decide to work with us.
@@ -30,8 +30,8 @@ export default function ContactCTA() {
         </div>
         
         {/* Card 2 */}
-        <div className="flex-1 bg-[#E2E2E2] rounded-none p-12 flex flex-col">
-          <h3 className="text-2xl font-bold text-brand-raisin mb-16">Let&apos;s Start the Work</h3>
+        <div className="flex-1 bg-[#E2E2E2] rounded-none p-8 md:p-12 flex flex-col">
+          <h3 className="text-2xl font-bold text-brand-raisin mb-12 md:mb-16">Let&apos;s Start the Work</h3>
           
           <div className="flex flex-col gap-8 flex-1">
             <input type="text" placeholder="Your Name" className="w-full bg-transparent border-b-2 border-brand-raisin/20 pb-3 outline-none font-bold text-brand-raisin placeholder:text-brand-raisin focus:border-brand-raisin transition-colors" />
