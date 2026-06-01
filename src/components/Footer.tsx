@@ -30,12 +30,13 @@ export default function Footer() {
         </div>
       </div>
       
-      {/* Massive Background Text */}
-      <div className="w-full flex justify-center -mb-[5%] mt-auto overflow-hidden select-none pointer-events-none opacity-[0.07]">
-        <h1 className="text-[35vw] font-bold text-brand-raisin leading-[0.75] tracking-tighter m-0 p-0 flex items-start">
-          efika
-          <span className="text-[12vw] leading-none ml-2">*</span>
-        </h1>
+      {/* Massive Background Logo */}
+      <div className="w-full flex justify-center mt-auto select-none pointer-events-none opacity-[0.04] grayscale brightness-0">
+        <img 
+          src="/logo-efika-full.png" 
+          alt="Efika Background" 
+          className="w-full h-auto object-contain -my-[12%] md:-my-[15%] px-4 md:px-8 max-w-[1600px]" 
+        />
       </div>
     </footer>
   );
