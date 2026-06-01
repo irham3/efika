@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Rethink_Sans } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const rethinkSans = Rethink_Sans({
+  variable: "--font-rethink-sans",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "Efika Creative",
-  description: "Creative digital solutions - We create exceptional digital experiences that inspire and innovate",
+  description: "Design and Branding studio helping startup, agency, and brands to grow.",
 };
 
 export default function RootLayout({
@@ -25,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${rethinkSans.variable} font-sans antialiased text-brand-raisin selection:bg-brand-primary selection:text-white`}
       >
         {children}
       </body>

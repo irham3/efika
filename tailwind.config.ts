@@ -49,13 +49,34 @@ export default {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
+  			},
+  			brand: {
+  				primary: '#FF4632',
+  				raisin: '#202020',
+  				linen: '#F8ECE7',
+  				princeton: '#FF8528',
+  				portland: '#FB602E',
+  				blue: '#0656F3',
+  				crayola: '#0144C4',
   			}
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+  		fontFamily: {
+  			sans: ['var(--font-rethink-sans)', 'sans-serif'],
+  		},
+        animation: {
+            marquee: 'marquee 25s linear infinite',
+        },
+        keyframes: {
+            marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-50%)' },
+            }
+        }
   	}
   },
   plugins: [require("tailwindcss-animate")],
