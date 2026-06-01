@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${rethinkSans.variable} font-sans antialiased text-brand-raisin selection:bg-brand-primary selection:text-white`}
       >

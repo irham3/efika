@@ -1,5 +1,6 @@
+'use client';
 import React, { useEffect, useRef } from 'react';
-import { useInView, motion, useAnimation } from 'framer-motion';
+import { useInView, motion, useAnimation } from 'motion/react';
 
 interface CounterProps {
   end: number;
