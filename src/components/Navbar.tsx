@@ -37,9 +37,10 @@ export default function Navbar() {
         scrolled ? "bg-white/80 backdrop-blur-md border-b border-brand-raisin/5 shadow-sm" : "bg-transparent"
       }`}
     >
-      <div className="flex items-center gap-1">
-        <Link href="/" className="text-2xl md:text-3xl font-bold text-brand-raisin tracking-tight">efika</Link>
-        <div className="text-brand-primary font-bold text-2xl md:text-3xl leading-none mt-2">*</div>
+      <div className="flex items-center">
+        <Link href="/">
+          <img src="/logo-efika-full.png" alt="Efika Logo" className="h-8 md:h-10 w-auto" />
+        </Link>
       </div>
 
       <div className="hidden md:flex items-center justify-center gap-8 lg:gap-16 font-medium text-lg">
