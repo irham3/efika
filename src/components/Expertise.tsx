@@ -1,119 +1,102 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowUpRight } from 'lucide-react';
 
-const expertises = [
+const disciplines = [
   {
     num: '01',
     title: 'Creative Direction',
     subtitle: 'Brand Strategy',
-    colorHex: '#FF4632', // Primary (Coral Red)
+    bg: 'bg-[#1A1A1A]',
+    image: '/expertise/creative_direction.png',
+    hoverHeight: 350,
   },
   {
     num: '02',
     title: 'Branding',
     subtitle: 'Identity & Guideline',
-    colorHex: '#0656F3', // Blue (RYB)
+    bg: 'bg-[#2A2A2A]',
+    image: '/expertise/branding.png',
+    hoverHeight: 450,
   },
   {
     num: '03',
     title: 'Motion Design',
     subtitle: 'Storytelling',
-    colorHex: '#FF8528', // Princeton Orange
+    bg: 'bg-[#3A3A3A]',
+    image: '/expertise/motion_design.png',
+    hoverHeight: 600,
   }
 ];
 
 export default function Expertise() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
+
   return (
-    <section className="w-full px-6 md:px-12 py-16 md:py-32 bg-white flex flex-col lg:flex-row gap-10 lg:gap-16">
-      <div className="w-full lg:w-48 shrink-0">
-        <h3 className="text-base font-bold text-brand-raisin lg:sticky top-32">Expertise</h3>
-      </div>
-      
-      <div className="flex-1 flex flex-col">
-        <div className="flex flex-col xl:flex-row gap-8 lg:gap-12 mb-16 lg:mb-24">
-          <h2 className="flex-1 text-4xl md:text-5xl lg:text-6xl font-bold text-brand-raisin leading-[1.1] tracking-tight">
-            Our Disciplines<br className="hidden md:block"/>That Bring Idea<br className="hidden md:block"/>Become Impact
+    <section className="w-full flex flex-col bg-white">
+      {/* Header Area */}
+      <div className="w-full px-6 md:px-12 py-16 md:py-24 flex flex-col lg:flex-row gap-10 lg:gap-16">
+        <div className="w-full lg:w-48 shrink-0">
+          <h3 className="text-base font-medium text-brand-raisin">Expertise</h3>
+        </div>
+
+        <div className="flex-1 flex flex-col xl:flex-row gap-8 lg:gap-12">
+          <h2 className="flex-1 text-4xl md:text-5xl lg:text-[4rem] font-semibold text-brand-raisin leading-[1.25] tracking-tight flex flex-col">
+            <span>Our Disciplines</span>
+            <span>That Bring Idea</span>
+            <span className="flex">
+              <span className="invisible select-none pointer-events-none" aria-hidden="true">That&nbsp;</span>
+              <span>Become Impact</span>
+            </span>
           </h2>
           <div className="flex-1 pt-2 xl:pl-16">
-            <p className="text-base font-bold text-brand-raisin leading-relaxed mb-6">
-              We work across multiple disciplines to shaping how brand&apos;s are structured, designed, and built.
-            </p>
-            <p className="text-base font-bold text-brand-raisin leading-relaxed">
-              Each discipline represents its own function, contributing to a larger interconnected ecosystem.
+            <p className="text-base font-medium text-brand-raisin leading-relaxed">
+              We work across multiple disciplines to shape how brands are structured, designed, and built.
+              <br /><br />
+              Each discipline is its own function — contributing to a larger, interconnected ecosystem.
             </p>
           </div>
         </div>
-        
-        <div className="w-full flex flex-col gap-0 border-t-2 border-brand-raisin">
-          {expertises.map((exp, index) => (
-            <motion.div 
-              key={index}
-              initial="initial"
-              whileHover="hover"
-              className="flex w-full group cursor-pointer border-b-2 border-brand-raisin overflow-hidden"
-            >
-              {/* Main content block */}
-              <motion.div 
-                variants={{
-                  initial: { backgroundColor: '#ffffff' },
-                  hover: { backgroundColor: exp.colorHex }
-                }}
-                transition={{ duration: 0.4, ease: 'easeOut' }}
-                className="flex-[4] p-6 md:p-10 lg:p-12 flex flex-col justify-center min-h-[160px] md:min-h-[220px]"
-              >
-                <motion.h3 
-                  variants={{
-                    initial: { color: '#202020' }, // Raisin Black
-                    hover: { color: '#ffffff' }
-                  }}
-                  className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4 tracking-tight flex items-center gap-4 md:gap-6"
-                >
-                  <motion.span 
-                    variants={{
-                      initial: { color: '#FF4632' },
-                      hover: { color: '#ffffff' }
-                    }}
-                    className="text-lg md:text-2xl font-bold"
-                  >
-                    {exp.num}.
-                  </motion.span> 
-                  {exp.title}
-                </motion.h3>
-                <motion.p 
-                  variants={{
-                    initial: { color: '#202020', opacity: 0.6 },
-                    hover: { color: '#ffffff', opacity: 0.9 }
-                  }}
-                  className="text-base md:text-2xl font-medium ml-10 md:ml-[3.5rem]"
-                >
-                  {exp.subtitle}
-                </motion.p>
-              </motion.div>
+      </div>
 
-              {/* Side block / Arrow */}
-              <motion.div 
-                variants={{
-                  initial: { backgroundColor: '#ffffff' },
-                  hover: { backgroundColor: '#202020' }
-                }}
-                transition={{ duration: 0.4, ease: 'easeOut' }}
-                className="flex-[1] md:flex-[2] flex items-center justify-center relative overflow-hidden border-l-2 border-brand-raisin"
-              >
+      {/* Stacked Rows Area */}
+      <div className="w-full flex flex-col text-white px-6 md:px-12 pb-16 md:pb-32">
+        {disciplines.map((item, index) => {
+          const isHovered = hoveredIndex === index;
+          return (
+            <div
+              key={item.num}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onClick={() => setHoveredIndex(index)}
+              className={`w-full ${item.bg} flex flex-col md:flex-row cursor-pointer`}
+            >
+              {/* Left Column: Text */}
+              <div className="flex-[5] p-8 md:p-12 lg:p-20 flex flex-col justify-start">
+                <h3 className="text-3xl md:text-5xl lg:text-[4rem] font-semibold mb-2 md:mb-4 tracking-tight flex items-baseline gap-3 md:gap-6">
+                  <span className="text-2xl md:text-4xl opacity-50">{item.num}.</span>
+                  {item.title}
+                </h3>
+                <p className="text-xl md:text-2xl font-medium opacity-80 md:ml-[5.5rem]">{item.subtitle}</p>
+              </div>
+
+              {/* Right Column: Media */}
+              <div className="flex-[4] p-8 md:p-12 lg:p-20 md:pl-0 pt-0 md:pt-12 lg:pt-20">
                 <motion.div
-                  variants={{
-                    initial: { scale: 0.5, opacity: 0, x: -30, y: 30 },
-                    hover: { scale: 1, opacity: 1, x: 0, y: 0 }
-                  }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  animate={{ height: isHovered ? item.hoverHeight : 100 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-full relative bg-black/20 overflow-hidden"
                 >
-                  <ArrowUpRight className="w-10 h-10 md:w-20 md:h-20 text-white" strokeWidth={1.5} />
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isHovered ? 'mix-blend-normal opacity-100' : 'mix-blend-luminosity opacity-80'}`}
+                  />
                 </motion.div>
-              </motion.div>
-            </motion.div>
-          ))}
-        </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
