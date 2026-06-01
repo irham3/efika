@@ -1,8 +1,42 @@
+'use client';
+
 import Link from 'next/link';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { useState } from 'react';
 
 export default function Navbar() {
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    
+    if (latest > 50) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+
+    if (latest > 150 && latest > previous) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  });
+
   return (
-    <nav className="w-full flex items-center justify-between py-6 px-6 md:py-8 md:px-12">
+    <motion.nav 
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-100%" }
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      className={`fixed top-0 left-0 w-full flex items-center justify-between py-4 px-6 md:py-6 md:px-12 z-50 transition-colors duration-300 ${
+        scrolled ? "bg-white/80 backdrop-blur-md border-b border-brand-raisin/5 shadow-sm" : "bg-transparent"
+      }`}
+    >
       <div className="flex items-center gap-1">
         <Link href="/" className="text-2xl md:text-3xl font-bold text-brand-raisin tracking-tight">efika</Link>
         <div className="text-brand-primary font-bold text-2xl md:text-3xl leading-none mt-2">*</div>
@@ -22,6 +56,6 @@ export default function Navbar() {
           Say Hi!
         </Link>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

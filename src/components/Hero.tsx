@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section className="w-full px-6 md:px-12 pt-12 md:pt-24 pb-20 md:pb-32 flex flex-col md:flex-row gap-10 md:gap-16 justify-between items-start">
       <div className="flex-1">
-        <h1 className="text-4xl md:text-5xl lg:text-[4.5rem] font-semibold text-brand-raisin leading-[1.1] tracking-tight max-w-[900px]">
+        <h1 className="text-4xl md:text-5xl lg:text-[4rem] font-semibold text-brand-raisin leading-[1.1] tracking-tight max-w-[800px]">
           Design and Branding studio helping startup, agency, and brands to grow.
         </h1>
       </div>
