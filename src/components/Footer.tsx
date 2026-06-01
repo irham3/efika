@@ -9,7 +9,7 @@ export default function Footer() {
           <a href="mailto:efika@gmail.com" className="block text-lg font-bold text-brand-raisin hover:text-brand-primary transition-colors mb-2">efika@gmail.com</a>
           <a href="tel:+628123456789" className="block text-lg font-bold text-brand-raisin hover:text-brand-primary transition-colors">+62 8123456789</a>
         </div>
-        
+
         <div className="flex flex-col">
           <h4 className="text-base font-bold text-brand-raisin mb-6">Navigation</h4>
           <Link href="#services" className="text-lg font-bold text-brand-raisin hover:text-brand-primary transition-colors mb-2">Services</Link>
@@ -21,7 +21,7 @@ export default function Footer() {
           <span className="text-lg font-bold text-brand-raisin mb-2">Insights (Coming soon)</span>
           <span className="text-lg font-bold text-brand-raisin">Blog (Coming soon)</span>
         </div>
-        
+
         <div className="flex flex-col">
           <h4 className="text-base font-bold text-brand-raisin mb-6">Socials</h4>
           <a href="#" className="text-lg font-bold text-brand-raisin hover:text-brand-primary transition-colors mb-2">Behance</a>
@@ -29,13 +29,13 @@ export default function Footer() {
           <a href="#" className="text-lg font-bold text-brand-raisin hover:text-brand-primary transition-colors">Instagram</a>
         </div>
       </div>
-      
+
       {/* Massive Background Logo */}
-      <div className="w-full flex justify-center mt-auto select-none pointer-events-none opacity-[0.04] grayscale brightness-0">
-        <img 
-          src="/logo-efika-full.png" 
-          alt="Efika Background" 
-          className="w-full h-auto object-contain -my-[12%] md:-my-[15%] px-4 md:px-8 max-w-[1600px]" 
+      <div className="w-full px-16 flex justify-center mt-12 md:mt-24 mb-6 md:mb-12 select-none pointer-events-none">
+        <img
+          src="/logo-efika-full-background.svg"
+          alt="Efika Background"
+          className="w-full h-auto"
         />
       </div>
     </footer>
