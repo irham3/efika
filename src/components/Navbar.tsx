@@ -11,7 +11,7 @@ export default function Navbar() {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
-    
+
     if (latest > 50) {
       setScrolled(true);
     } else {
@@ -26,16 +26,15 @@ export default function Navbar() {
   });
 
   return (
-    <motion.nav 
+    <motion.nav
       variants={{
         visible: { y: 0 },
         hidden: { y: "-100%" }
       }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
-      className={`fixed top-0 left-0 w-full flex items-center justify-between py-4 px-6 md:py-6 md:px-12 z-50 transition-colors duration-300 ${
-        scrolled ? "bg-white/80 backdrop-blur-md border-b border-brand-raisin/5 shadow-sm" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 w-full flex items-center justify-between py-4 px-6 md:py-6 md:px-12 z-50 transition-colors duration-300 ${scrolled ? "bg-white/80 backdrop-blur-md border-b border-brand-raisin/5 shadow-sm" : "bg-transparent"
+        }`}
     >
       <div className="flex items-center">
         <Link href="/" className="flex items-center justify-center w-24 md:w-32 h-8 md:h-10">
@@ -48,9 +47,9 @@ export default function Navbar() {
         <Link href="#works" className="text-brand-raisin hover:text-brand-primary transition-colors">Works</Link>
       </div>
 
-      <div className="flex items-center justify-end gap-6 lg:gap-12">
-        <div className="text-sm text-right text-brand-raisin/70 hidden lg:block">
-          <p className="font-medium text-brand-raisin">Based in Indonesia | Worldwide [09:00 WIB (UTC+7)]</p>
+      <div className="flex items-center justify-end lg:justify-between gap-6 lg:gap-8 lg:w-[460px] xl:w-[500px] shrink-0">
+        <div className="text-sm text-left text-brand-raisin/70 hidden lg:block">
+          <p className="font-medium text-brand-raisin whitespace-nowrap">Based in Indonesia | Worldwide [09:00 WIB (UTC+7)]</p>
           <p className="text-brand-raisin/40">Good Brand is by Design</p>
         </div>
         <Link href="#contact" className="px-6 py-2 md:px-8 md:py-3 text-sm md:text-base bg-brand-raisin text-white rounded-full font-medium hover:bg-black transition-colors shrink-0">
